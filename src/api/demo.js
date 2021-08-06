@@ -14,8 +14,29 @@ const bannerImg = {
 const getBannerImg = params => {
   return request.get(bannerImg.bannerImgs, params);
 };
+const hotImg = {
+  hotImgs: "/personalized?limit=8",
+};
+const getHotImgs = params => {
+  return request.get(hotImg.hotImgs, params);
+};
+const XinDie = {
+  XinDies: "/album/newest",
+};
+const getXinDies = params => {
+  return request.get(XinDie.XinDies, params);
+};
 
+const BanDan1 = {
+  BanDans1: "/artists?id=6452",
+};
+const getBanDans1 = params => {
+  return request.get(BanDan1.BanDans1, params);
+};
 export default {
   getHotSongs,
   getBannerImg,
+  getHotImgs,
+  getXinDies,
+  getBanDans1,
 };

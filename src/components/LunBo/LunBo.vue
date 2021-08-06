@@ -5,8 +5,8 @@
         <ul class="img_ul">
           <li>
             <img ref="banner" src="" />
-            <ol class="yuandian">
-              <li></li> </ol
+            <ol ref="listli" class="yuandian">
+              <li v-for="item in arr" :key="item.bannerId" @click="liclick"></li> </ol
           ></li>
         </ul>
         <div class="focus">
@@ -22,19 +22,17 @@
     </div>
   </div>
 </template>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script>
 import api from "@/api/demo.js";
-import Vue from "vue";
 
 var ydindex = 0;
 export default {
-  name: "LunBo",
+  name: "Lunbotu",
   data() {
     return {
       arr: [],
+      liarr: {},
       ydindex: 0,
     };
   },
@@ -44,7 +42,6 @@ export default {
       type: 2,
     };
     const data = await api.getBannerImg(params);
-    console.log(data);
     this.arr = data.banners;
     this.$refs.banner.src = this.arr[ydindex].pic;
   },
@@ -67,6 +64,9 @@ export default {
     },
     showimg: function () {
       this.$refs.banner.src = this.arr[ydindex].pic;
+    },
+    liclick() {
+      this.$refs.banner.src = this.arr[0].pic;
     },
   },
 };
@@ -144,12 +144,14 @@ export default {
   bottom: 10px;
   left: 50%;
   text-align: center;
+  transform: translateX(-145px);
 }
 
 .yuandian li {
   display: inline-block;
   width: 15px;
   height: 15px;
+  margin-left: 10px;
   border: 3px solid rgb(43, 42, 42);
   border-radius: 15px;
 }
