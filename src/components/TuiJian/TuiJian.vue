@@ -15,7 +15,7 @@
     <div class="top-2">
       <ul ref="ul">
         <li v-for="item in arr" :key="item.id">
-          <div class="pig"><img src="../../assets/img/pig-1.jpg" alt="" class="pigone" /></div>
+          <div class="pig"><img :src="item.picUrl" alt="" class="pigone" /></div>
           <div class="heise">
             <span class="pig-erji"></span>
             <span ref="shuju" class="shuju">{{ item.playCount }}</span>

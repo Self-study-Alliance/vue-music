@@ -6,8 +6,9 @@
           <li>
             <img ref="banner" src="" />
             <ol ref="listli" class="yuandian">
-              <li v-for="item in arr" :key="item.bannerId" @click="liclick"></li> </ol
-          ></li>
+              <li v-for="(item, index) in arr" :key="item.bannerId" :class="isactive == index ? 'onyuandian' : ''" @click="liclick(index)"></li>
+            </ol>
+          </li>
         </ul>
         <div class="focus">
           <span class="left lbbtm" @click="goPre()">&lt;</span>
@@ -26,7 +27,6 @@
 <script>
 import api from "@/api/demo.js";
 
-var ydindex = 0;
 export default {
   name: "Lunbotu",
   data() {
@@ -34,6 +34,7 @@ export default {
       arr: [],
       liarr: {},
       ydindex: 0,
+      isactive: 0,
     };
   },
 
@@ -43,30 +44,36 @@ export default {
     };
     const data = await api.getBannerImg(params);
     this.arr = data.banners;
-    this.$refs.banner.src = this.arr[ydindex].pic;
+    this.$refs.banner.src = this.arr[this.ydindex].pic;
   },
   methods: {
     // 上一张函数
     goPre: function () {
-      if (ydindex == 0) {
-        ydindex = this.arr.length;
+      if (this.ydindex == 0) {
+        this.ydindex = this.arr.length;
+        this.isactive = this.arr.length;
       }
-      ydindex--;
+      this.ydindex--;
+      this.isactive--;
       this.showimg();
     },
     // 下一张函数
     goNext: function () {
-      if (ydindex == this.arr.length - 1) {
-        ydindex = -1;
+      if (this.ydindex == this.arr.length - 1) {
+        this.ydindex = -1;
+        this.isactive = -1;
       }
-      ydindex++;
+      this.ydindex++;
+      this.isactive++;
       this.showimg();
     },
     showimg: function () {
-      this.$refs.banner.src = this.arr[ydindex].pic;
+      this.$refs.banner.src = this.arr[this.ydindex].pic;
     },
-    liclick() {
-      this.$refs.banner.src = this.arr[0].pic;
+    liclick(index) {
+      this.ydindex = index;
+      this.isactive = this.ydindex;
+      this.$refs.banner.src = this.arr[this.ydindex].pic;
     },
   },
 };
@@ -145,6 +152,10 @@ export default {
   left: 50%;
   text-align: center;
   transform: translateX(-145px);
+}
+
+.onyuandian {
+  background-color: red;
 }
 
 .yuandian li {

@@ -17,9 +17,9 @@
             <a href="#" class="bangdan-bofang bangdan-bofang-2"></a>
           </div>
           <ol class="xuhao">
-            <li v-for="item in arr1" :key="item.id">
-              <p class="paixu">{{ num }}</p
-              ><a href="#" class="biaoshengbang">{{ item.name }}</a>
+            <li v-for="(item, index) in arr1" :key="item.id">
+              <p class="paixu">{{ index + 1 }}</p>
+              <a href="#" class="biaoshengbang">{{ item.name }}</a>
               <div class="three">
                 <a href="#" class="three-1"> </a>
                 <a href="#" class="three-2"> </a>

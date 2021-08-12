@@ -13,7 +13,7 @@
         <a href="#" class="houtui top-4-jt">&#60;</a>
         <ul class="flexul">
           <li v-for="item in arr" :key="item.copyrightId">
-            <a href="#" class="fengmian"><img src="../../assets/img/music-1.jpg" alt="" class="pig-xd" /></a>
+            <a href="#" class="fengmian"><img :src="item.picUrl" alt="" class="pig-xd" /></a>
             <div class="musicer">
               <a href="#" class="musicname">{{ item.artist.name }}</a
               ><br />
@@ -109,6 +109,11 @@ export default {
   height: 100px;
   background-image: url(../../assets/img/pig-bl.png);
   background-position: 0 -570px;
+}
+
+.fengmian img {
+  width: 115px;
+  height: 100px;
 }
 
 .music-d li {

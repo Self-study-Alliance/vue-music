@@ -15,13 +15,47 @@
         </ul>
         <input class="ipt" type="text" placeholder="音乐/电台/用户" />
         <button class="btn">创作者中心</button>
-        <div class="dlf"><a href="#" class="dl">登录</a> <img src="" alt="" class="touxiang" /></div>
-      </div> </div
-  ></div>
+        <div class="dlf"><a v-if="!ist" href="#" class="dl" @click="isshow = true">登录</a> <img v-show="ist" :src="img" alt="" class="touxiang" /></div>
+        <div v-if="isshow" id="denglu">
+          <h4>登录<span class="guan" @click="isshow = false">X</span></h4>
+          <div class="zhangmi">
+            <input v-model="phone" type="text" class="zhanghao" />
+            <input v-model="password" type="password" class="mima" />
+            <button class="dianjidl" @click="dl">立即登录</button>
+          </div>
+        </div>
+      </div>
+    </div></div
+  >
 </template>
 <script>
+import api from "@/api/demo";
 export default {
   name: "NavTop",
+  data() {
+    return {
+      isshow: false,
+      phone: "",
+      password: "",
+      img: "",
+      ist: "",
+    };
+  },
+  methods: {
+    async dl() {
+      const params = {
+        phone: this.phone,
+        password: this.password,
+      };
+      const data = await api.getDenLu(params);
+      if (data.code == 200) {
+        this.isshow = false;
+        this.$store.commit("changedl", { abc: true });
+        this.img = data.profile.avatarUrl;
+        this.ist = this.$store.getters.getzt;
+      }
+    },
+  },
 };
 </script>
 <style scoped>
@@ -114,7 +148,7 @@ export default {
   height: 35px;
   margin: 1px solid rgb(189, 77, 77);
   margin-left: 220px;
-  text-align: center;
+  text-align: left;
   border: auto 0;
   border-radius: 15px;
   transform: translateY(-10px);
@@ -158,11 +192,64 @@ export default {
 
 .touxiang {
   position: absolute;
-  display: none;
   width: 50px;
   height: 50px;
   margin-top: 10px;
   margin-left: 20px;
   line-height: 80px;
+  border-radius: 25px;
+}
+
+#denglu {
+  position: fixed;
+  bottom: 150px;
+  left: 50%;
+  z-index: 99;
+  width: 530px;
+  height: 375px;
+  margin-left: -265px;
+  background-color: #fff;
+  border: 1px solid #aeaaaa;
+}
+
+#denglu h4 {
+  display: inline-block;
+  width: 100%;
+  height: 40px;
+  font-size: 17px;
+  line-height: 40px;
+  color: azure;
+  text-align: center;
+  background-color: rgb(61, 61, 61);
+}
+
+.guan {
+  display: inline-block;
+  margin-left: 450px;
+  font-size: 20px;
+  line-height: 40px;
+}
+
+.zhangmi {
+  width: 340px;
+  height: 150px;
+  margin-top: 80px;
+  margin-left: 85px;
+  background-color: chartreuse;
+}
+
+.zhangmi input {
+  display: inline-block;
+  width: 155px;
+  height: 25px;
+  margin-top: 20px;
+  margin-left: 95px;
+  border: 1px solid #aeaaaa;
+}
+
+.dianjidl {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
 }
 </style>

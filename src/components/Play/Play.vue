@@ -45,8 +45,6 @@ export default {
     const params = {};
     const data1 = await api.getBanDans1(params);
     this.arr1 = data1.hotSongs;
-    this.arr1.length = 10;
-    console.log(this.arr1);
   },
 };
 </script>
@@ -178,7 +176,9 @@ export default {
 }
 
 .butmusic-3 {
-  float: left;
+  position: absolute;
+  top: 12px;
+  right: 340px;
 }
 
 .butmusic-3 a {

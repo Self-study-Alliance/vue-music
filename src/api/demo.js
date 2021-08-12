@@ -30,8 +30,16 @@ const getXinDies = params => {
 const BanDan1 = {
   BanDans1: "/artists?id=6452",
 };
+
 const getBanDans1 = params => {
   return request.get(BanDan1.BanDans1, params);
+};
+
+const DenLu = {
+  DenLu: "/login/cellphone",
+};
+const getDenLu = params => {
+  return request.get(DenLu.DenLu, params);
 };
 export default {
   getHotSongs,
@@ -39,4 +47,5 @@ export default {
   getHotImgs,
   getXinDies,
   getBanDans1,
+  getDenLu,
 };
