@@ -53,6 +53,11 @@ export default {
         this.$store.commit("changedl", { abc: true });
         this.img = data.profile.avatarUrl;
         this.ist = this.$store.getters.getzt;
+        this.$store.token = data.token;
+        console.log(this.$store.token, "vuex token");
+        // localStorage.setItem("tokenv", data.token);
+        // let num = localStorage.valueOf();
+        // console.log(num, "localstorage");
       }
     },
   },
